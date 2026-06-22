@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ezequiel A. — Desarrollo de Páginas Web | Neuquén</title>
+  <meta name="description" content="Diseño y desarrollo de páginas web para profesionales y negocios en Neuquén. Webs modernas, rápidas y a medida." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+  <style>
+    :root {
+      --color-accent: #D62828;
+      --color-accent-light: #FBE7E7;
+      --color-accent-dark: #A11F1F;
+      --color-text: #1A1414;
+      --color-text-muted: #6B5F5F;
+      --color-bg: #FFFFFF;
+      --color-bg-soft: #FFF8F8;
+      --color-border: #F0E0E0;
+      --font-display: 'DM Serif Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 14px;
+      --radius-sm: 9px;
+      --shadow: 0 10px 36px rgba(214,40,40,0.10);
+      --shadow-sm: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); padding: 0 2rem; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon { width: 38px; height: 38px; border-radius: 9px; background: var(--color-accent); display: flex; align-items: center; justify-content: center; color: white; font-size: 19px; }
+    .nav-logo-text { font-size: 14.5px; font-weight: 700; letter-spacing: -0.2px; }
+    .nav-logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--color-text-muted); letter-spacing: 0.2px; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+    .nav-links a:not(.nav-cta) { font-size: 14px; color: var(--color-text-muted); transition: color 0.2s; }
+    .nav-links a:not(.nav-cta):hover { color: var(--color-accent); }
+    .nav-cta { background: var(--color-accent); color: white !important; padding: 9px 20px; border-radius: 100px; font-size: 14px; font-weight: 500; transition: background 0.2s, transform 0.1s; display: flex; align-items: center; gap: 6px; }
+    .nav-cta:hover { background: var(--color-accent-dark) !important; transform: translateY(-1px); }
+
+    /* HERO */
+    .hero-section { background: linear-gradient(180deg, var(--color-bg-soft) 0%, #FFFFFF 100%); padding: 5.5rem 2rem 4.5rem; }
+    .hero { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; color: var(--color-accent); background: var(--color-accent-light); padding: 6px 14px; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(2.1rem, 4.2vw, 3rem); line-height: 1.12; letter-spacing: -0.5px; margin-bottom: 1.25rem; }
+    .hero h1 em { font-style: italic; color: var(--color-accent); }
+    .hero-desc { font-size: 16.5px; color: var(--color-text-muted); line-height: 1.75; margin-bottom: 2.25rem; max-width: 460px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 9px; background: var(--color-accent); color: white; padding: 14px 26px; border-radius: 100px; font-size: 15.5px; font-weight: 500; transition: background 0.2s, transform 0.1s; box-shadow: 0 8px 24px rgba(214,40,40,0.28); }
+    .btn-primary:hover { background: var(--color-accent-dark); transform: translateY(-2px); }
+    .btn-primary svg { width: 19px; height: 19px; fill: white; }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 6px; color: var(--color-text-muted); font-size: 15px; padding: 12px 4px; transition: color 0.2s; }
+    .btn-ghost:hover { color: var(--color-accent); }
+
+    .hero-stats-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .hero-stat-card { background: white; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.5rem; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); transition: transform 0.2s; }
+    .hero-stat-card:hover { transform: translateY(-2px); }
+    .hero-stat-card--accent { background: var(--color-accent); border-color: var(--color-accent); color: white; }
+    .hero-stat-card--accent .hero-stat-label { color: rgba(255,255,255,0.8); }
+    .hero-stat-card--accent .hero-stat-icon { background: rgba(255,255,255,0.2); color: white; }
+    .hero-stat-icon { width: 44px; height: 44px; min-width: 44px; border-radius: 10px; background: var(--color-accent-light); display: flex; align-items: center; justify-content: center; color: var(--color-accent); font-size: 22px; }
+    .hero-stat-num { font-family: var(--font-display); font-size: 20px; line-height: 1.1; }
+    .hero-stat-label { font-size: 12px; color: var(--color-text-muted); margin-top: 2px; }
+
+    /* SECTION COMMON */
+    .section { padding: 5.5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-full { padding: 5.5rem 2rem; background: var(--color-bg-soft); }
+    .section-full-inner { max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 3rem; text-align: center; }
+    .section-header.left { text-align: left; }
+    .section-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.75rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.2vw, 2.35rem); line-height: 1.2; letter-spacing: -0.3px; }
+    .section-subtitle { font-size: 16px; color: var(--color-text-muted); margin-top: 0.85rem; line-height: 1.7; }
+    .section-header .section-subtitle { max-width: 540px; margin-left: auto; margin-right: auto; }
+    .section-header.left .section-subtitle { margin-left: 0; max-width: 480px; }
+
+    /* SERVICIOS / PARA QUIÉN */
+    .audience-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.1rem; }
+    .audience-card { background: white; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.5rem 1.25rem; text-align: center; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+    .audience-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--color-accent-light); }
+    .audience-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--color-accent-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--color-accent); font-size: 24px; }
+    .audience-card h3 { font-size: 14.5px; font-weight: 500; }
+
+    /* POR QUÉ TENER UNA WEB */
+    .why-web-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .why-web-card { background: white; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.75rem 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .why-web-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .why-web-card--highlight { background: var(--color-accent); border-color: var(--color-accent); color: white; }
+    .why-web-card--highlight p { color: rgba(255,255,255,0.85); }
+    .why-web-card--highlight .why-web-icon { background: rgba(255,255,255,0.2); color: white; }
+    .why-web-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--color-accent-light); display: flex; align-items: center; justify-content: center; color: var(--color-accent); font-size: 23px; margin-bottom: 1rem; }
+    .why-web-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 0.5rem; }
+    .why-web-card p { font-size: 13.5px; color: var(--color-text-muted); line-height: 1.65; }
+
+    /* PROCESO */
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; position: relative; }
+    .process-card { background: white; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.75rem 1.5rem; position: relative; }
+    .process-num { font-family: var(--font-display); font-size: 32px; color: var(--color-accent-light); position: absolute; top: 14px; right: 18px; line-height: 1; }
+    .process-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--color-accent-light); display: flex; align-items: center; justify-content: center; color: var(--color-accent); font-size: 21px; margin-bottom: 1rem; }
+    .process-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 0.5rem; }
+    .process-card p { font-size: 13px; color: var(--color-text-muted); line-height: 1.6; }
+
+    /* PLANES / QUÉ INCLUYE */
+    .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+    .plan-card { background: white; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 2rem; }
+    .plan-card--monthly { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent), var(--shadow); }
+    .plan-badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; background: var(--color-accent-light); color: var(--color-accent); padding: 4px 12px; border-radius: 100px; margin-bottom: 1rem; }
+    .plan-badge--monthly { background: var(--color-accent); color: white; }
+    .plan-title { font-size: 18px; font-weight: 500; margin-bottom: 0.5rem; line-height: 1.3; }
+    .plan-desc { font-size: 13.5px; color: var(--color-text-muted); line-height: 1.6; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; }
+    .plan-features li { display: flex; align-items: flex-start; gap: 12px; }
+    .plan-feature-icon { width: 34px; height: 34px; min-width: 34px; border-radius: 9px; background: var(--color-accent-light); color: var(--color-accent); display: flex; align-items: center; justify-content: center; font-size: 17px; margin-top: 1px; }
+    .plan-feature-icon--monthly { background: var(--color-accent); color: white; }
+    .plan-features strong { font-size: 14px; font-weight: 500; display: block; margin-bottom: 2px; }
+    .plan-features p { font-size: 12.5px; color: var(--color-text-muted); line-height: 1.55; }
+    .plan-note { display: flex; align-items: flex-start; gap: 8px; margin-top: 1.5rem; padding: 0.9rem 1rem; background: var(--color-accent-light); border-radius: var(--radius-sm); font-size: 12.5px; color: var(--color-accent-dark); line-height: 1.5; }
+    .plan-note i { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+
+    /* CTA FINAL */
+    .cta-final { background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%); border-radius: 24px; padding: 3.5rem 3rem; text-align: center; color: white; max-width: 1100px; margin: 0 auto; }
+    .cta-final h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 1rem; line-height: 1.2; }
+    .cta-final p { font-size: 16px; opacity: 0.9; max-width: 480px; margin: 0 auto 2rem; line-height: 1.7; }
+    .btn-white { display: inline-flex; align-items: center; gap: 9px; background: white; color: var(--color-accent); padding: 14px 28px; border-radius: 100px; font-size: 15.5px; font-weight: 600; transition: transform 0.15s, box-shadow 0.2s; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.2); }
+    .btn-white svg { width: 20px; height: 20px; fill: var(--color-accent); }
+    .cta-note { font-size: 13px; opacity: 0.75; margin-top: 1.25rem; }
+
+    /* FOOTER */
+    .footer { padding: 2.5rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; border-top: 1px solid var(--color-border); padding-top: 2rem; }
+    .footer-logo { font-size: 14.5px; font-weight: 600; }
+    .footer-logo span { display: block; font-size: 12px; font-weight: 400; color: var(--color-text-muted); margin-top: 2px; }
+    .footer-copy { font-size: 13px; color: var(--color-text-muted); }
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-social-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--color-bg-soft); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); transition: background 0.2s, color 0.2s; font-size: 16px; }
+    .footer-social-btn:hover { background: var(--color-accent-light); color: var(--color-accent); }
+
+    /* WHATSAPP FLOTANTE */
+    .whatsapp-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; }
+    .whatsapp-btn { display: flex; align-items: center; gap: 10px; background: #25D366; color: white; padding: 14px 20px; border-radius: 100px; font-size: 14px; font-weight: 500; box-shadow: 0 6px 24px rgba(37,211,102,0.4); transition: transform 0.2s, box-shadow 0.2s; animation: pulse-wa 3s infinite; }
+    .whatsapp-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(37,211,102,0.5); }
+    .whatsapp-btn svg { width: 22px; height: 22px; fill: white; }
+    @keyframes pulse-wa { 0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.4); } 50% { box-shadow: 0 6px 32px rgba(37,211,102,0.6); } }
+
+    .divider { height: 1px; background: var(--color-border); max-width: 1100px; margin: 0 auto; }
+
+    @media (max-width: 900px) {
+      .audience-grid { grid-template-columns: repeat(2, 1fr); }
+      .audience-grid .audience-card:last-child { grid-column: span 2; }
+      .plans-grid { grid-template-columns: 1fr; }
+      .why-web-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .includes-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-visual { order: -1; }
+      .hero-badge-float { display: none; }
+      .section, .section-full { padding: 3.5rem 1.25rem; }
+      .cta-final { padding: 2.5rem 1.5rem; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .whatsapp-btn span { display: none; }
+      .whatsapp-btn { padding: 14px; }
+    }
+
+    /* PORTFOLIO CARRUSEL */
+    .carousel-wrapper { position: relative; display: flex; align-items: center; gap: 1rem; margin-top: 2.5rem; }
+    .carousel-viewport { overflow: hidden; flex: 1; border-radius: var(--radius); }
+    .carousel-track { display: flex; transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1); }
+    .carousel-slide { min-width: 100%; padding: 0 2px; }
+    .carousel-card { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; background: white; border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .carousel-imgs { position: relative; overflow: hidden; background: var(--color-bg-soft); }
+    .carousel-img { width: 100%; height: 340px; object-fit: cover; object-position: top; display: none; }
+    .carousel-img--active { display: block; }
+    .carousel-img-nav { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+    .img-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; border: none; transition: background 0.2s; }
+    .img-dot--active { background: white; }
+    .carousel-info { padding: 2rem 2rem 2rem 0; display: flex; flex-direction: column; justify-content: center; }
+    .carousel-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; color: var(--color-accent); background: var(--color-accent-light); padding: 4px 12px; border-radius: 100px; margin-bottom: 1rem; }
+    .carousel-title { font-family: var(--font-display); font-size: 22px; font-weight: 500; margin-bottom: 0.75rem; letter-spacing: -0.3px; }
+    .carousel-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+    .carousel-features { display: flex; flex-direction: column; gap: 8px; }
+    .carousel-features span { font-size: 13px; color: var(--color-text-muted); display: flex; align-items: center; gap: 8px; }
+    .carousel-features i { color: #1A9E5A; font-size: 15px; }
+    .carousel-btn { width: 44px; height: 44px; min-width: 44px; border-radius: 50%; border: 1.5px solid var(--color-border); background: white; color: var(--color-text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: border-color 0.2s, color 0.2s, transform 0.1s; box-shadow: var(--shadow-sm); }
+    .carousel-btn:hover { border-color: var(--color-accent); color: var(--color-accent); transform: scale(1.08); }
+    .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1.5rem; }
+    .c-dot { width: 8px; height: 8px; border-radius: 100px; border: none; background: var(--color-border); cursor: pointer; transition: background 0.2s, width 0.2s; }
+    .c-dot--active { background: var(--color-accent); width: 24px; }
+    @media (max-width: 768px) {
+      .carousel-card { grid-template-columns: 1fr; }
+      .carousel-info { padding: 1.5rem; }
+      .carousel-img { height: 220px; }
+      .carousel-btn { display: none; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo">
+      <div class="nav-logo-icon"><i class="ti ti-code"></i></div>
+      <div class="nav-logo-text">
+        Ezequiel A.
+        <span>Desarrollo de Páginas Web</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#para-quien">Para quién</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#proceso">Cómo trabajo</a></li>
+      <li><a href="#incluye">Qué incluye</a></li>
+      <li>
+        <a href="https://wa.me/5492994610602?text=Hola%20Ezequiel%2C%20quiero%20consultar%20sobre%20una%20p%C3%A1gina%20web" class="nav-cta">
+          <i class="ti ti-brand-whatsapp"></i> Consultar
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow"><i class="ti ti-map-pin" style="font-size:13px;"></i> Neuquén Capital</div>
+        <h1>Tu negocio necesita una página web que <em>genere confianza</em></h1>
+        <p class="hero-desc">Diseño y desarrollo páginas web modernas y profesionales para estudios, comercios y profesionales independientes de Neuquén. Rápidas, claras y pensadas para que tus clientes confíen en vos desde el primer click.</p>
+        <div class="hero-actions">
+          <a href="https://wa.me/5492994610602?text=Hola%20Ezequiel%2C%20quiero%20consultar%20sobre%20una%20p%C3%A1gina%20web" class="btn-primary">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Consultar por WhatsApp
+          </a>
+          <a href="#proceso" class="btn-ghost">Cómo trabajo <i class="ti ti-arrow-down"></i></a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-stats-visual">
+          <div class="hero-stat-card">
+            <div class="hero-stat-icon"><i class="ti ti-clock"></i></div>
+            <div>
+              <div class="hero-stat-num">5-7 días</div>
+              <div class="hero-stat-label">Tiempo de entrega</div>
+            </div>
+          </div>
+          <div class="hero-stat-card hero-stat-card--accent">
+            <div class="hero-stat-icon"><i class="ti ti-map-pin"></i></div>
+            <div>
+              <div class="hero-stat-num">100%</div>
+              <div class="hero-stat-label">Local · Neuquén Capital</div>
+            </div>
+          </div>
+          <div class="hero-stat-card hero-stat-card--accent">
+            <div class="hero-stat-icon"><i class="ti ti-devices"></i></div>
+            <div>
+              <div class="hero-stat-num">Móvil</div>
+              <div class="hero-stat-label">Adaptada a celular</div>
+            </div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-icon"><i class="ti ti-headset"></i></div>
+            <div>
+              <div class="hero-stat-num">Siempre</div>
+              <div class="hero-stat-label">Disponible por WhatsApp</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- POR QUÉ TENER UNA PÁGINA WEB -->
+  <section class="section-full">
+    <div class="section-full-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">Por qué tener una página web</div>
+        <h2 class="section-title">Tu negocio existe, pero ¿te encuentran?</h2>
+        <p class="section-subtitle">En 2026, si no estás en internet, para muchos clientes directamente no existís.</p>
+      </div>
+      <div class="why-web-grid">
+        <div class="why-web-card">
+          <div class="why-web-icon"><i class="ti ti-clock-24"></i></div>
+          <h3>Disponible las 24 horas</h3>
+          <p>Tu página trabaja mientras vos descansás. Un cliente puede encontrarte, ver tus servicios y contactarte a cualquier hora, cualquier día.</p>
+        </div>
+        <div class="why-web-card">
+          <div class="why-web-icon"><i class="ti ti-shield-check"></i></div>
+          <h3>Genera confianza al instante</h3>
+          <p>El 75% de las personas juzga la credibilidad de un negocio por su presencia online. Una web profesional te diferencia de la competencia antes de que te llamen.</p>
+        </div>
+        <div class="why-web-card">
+          <div class="why-web-icon"><i class="ti ti-map-pin"></i></div>
+          <h3>Te encuentran en Google</h3>
+          <p>Cuando alguien busca "contador en Neuquén" o "abogado laboral", tu web aparece. Sin web, esa oportunidad va directo a tu competidor.</p>
+        </div>
+        <div class="why-web-card">
+          <div class="why-web-icon"><i class="ti ti-brand-whatsapp"></i></div>
+          <h3>Más consultas, menos fricción</h3>
+          <p>Un botón de WhatsApp bien ubicado convierte visitas en consultas reales. Tus clientes llegan listos para hablar, no para preguntar lo básico.</p>
+        </div>
+        <div class="why-web-card">
+          <div class="why-web-icon"><i class="ti ti-trending-up"></i></div>
+          <h3>Imagen profesional que vende</h3>
+          <p>Una web bien diseñada justifica cobrar más. La percepción de valor de tu servicio sube cuando tu presencia digital está a la altura.</p>
+        </div>
+        <div class="why-web-card">
+          <div class="why-web-icon"><i class="ti ti-coin"></i></div>
+          <h3>La inversión más rentable</h3>
+          <p>Con un solo cliente nuevo que llegue por tu web, ya se paga sola. Todo lo que viene después es ganancia pura.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUIÉN -->
+  <section id="para-quien" class="section">
+    <div class="section-header left">
+      <div class="section-eyebrow">Para quién trabajo</div>
+      <h2 class="section-title">Negocios y profesionales de Neuquén</h2>
+      <p class="section-subtitle">Si todavía no tenés página web, o la que tenés ya quedó vieja, puedo ayudarte.</p>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-icon"><i class="ti ti-scale"></i></div>
+        <h3>Estudios jurídicos</h3>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon"><i class="ti ti-calculator"></i></div>
+        <h3>Contadores</h3>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon"><i class="ti ti-building-store"></i></div>
+        <h3>Comercios locales</h3>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon"><i class="ti ti-stethoscope"></i></div>
+        <h3>Profesionales de la salud</h3>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon"><i class="ti ti-bulb"></i></div>
+        <h3>Emprendedores</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section id="proceso" class="section-full">
+    <div class="section-full-inner">
+      <div class="section-header left">
+        <div class="section-eyebrow">Cómo trabajo</div>
+        <h2 class="section-title">Simple, claro y sin vueltas</h2>
+        <p class="section-subtitle">Cuatro pasos desde que me contactás hasta que tu web está online.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-num">1</div>
+          <div class="process-icon"><i class="ti ti-message-circle"></i></div>
+          <h3>Charlamos</h3>
+          <p>Me contás de tu negocio y qué necesitás. Consulta sin cargo y sin compromiso.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-num">2</div>
+          <div class="process-icon"><i class="ti ti-palette"></i></div>
+          <h3>Te muestro una propuesta</h3>
+          <p>Armo una versión de tu web para que veas cómo quedaría antes de definir nada.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-num">3</div>
+          <div class="process-icon"><i class="ti ti-settings"></i></div>
+          <h3>Ajustamos juntos</h3>
+          <p>Revisamos textos, fotos y detalles hasta que quede exactamente como la querés.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-num">4</div>
+          <div class="process-icon"><i class="ti ti-rocket"></i></div>
+          <h3>La publicamos</h3>
+          <p>Configuro dominio y hosting, y tu web queda online y funcionando.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUÉ INCLUYE -->
+  <section id="incluye" class="section">
+    <div class="section-header left">
+      <div class="section-eyebrow">Qué incluye</div>
+      <h2 class="section-title">Todo lo que recibís por tu inversión</h2>
+      <p class="section-subtitle">Sin costos ocultos ni sorpresas. Esto es exactamente lo que incluye cada plan.</p>
+    </div>
+
+    <div class="plans-grid">
+
+      <!-- PAGO ÚNICO -->
+      <div class="plan-card">
+        <div class="plan-header">
+          <div class="plan-badge">Pago único</div>
+          <h3 class="plan-title">Desarrollo de tu landing page</h3>
+          <p class="plan-desc">Todo lo necesario para que tu negocio esté online con una presencia profesional.</p>
+        </div>
+        <ul class="plan-features">
+          <li>
+            <div class="plan-feature-icon"><i class="ti ti-layout"></i></div>
+            <div>
+              <strong>Landing page completa</strong>
+              <p>Diseño personalizado con tus colores, logo y contenido. Hasta 6 secciones.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon"><i class="ti ti-pencil"></i></div>
+            <div>
+              <strong>Cambios ilimitados durante el desarrollo</strong>
+              <p>Mientras la web no esté publicada, podés pedir todos los ajustes que quieras hasta que quede exactamente como la imaginás.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon"><i class="ti ti-devices"></i></div>
+            <div>
+              <strong>Adaptada a celular y computadora</strong>
+              <p>Se ve perfecta en cualquier pantalla sin excepciones.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon"><i class="ti ti-brand-whatsapp"></i></div>
+            <div>
+              <strong>Botón de WhatsApp y formulario de contacto</strong>
+              <p>Tus clientes te escriben con un solo click, desde cualquier dispositivo.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon"><i class="ti ti-world"></i></div>
+            <div>
+              <strong>Dominio .com.ar incluido el primer año</strong>
+              <p>Tu dirección propia en internet (ej: tunegocio.com.ar), registrada a tu nombre.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon"><i class="ti ti-search"></i></div>
+            <div>
+              <strong>SEO básico incluido</strong>
+              <p>Optimización para que aparezcas bien en Google cuando alguien busque el nombre de tu negocio.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon"><i class="ti ti-lock"></i></div>
+            <div>
+              <strong>Certificado SSL incluido</strong>
+              <p>El candado de seguridad que aparece en el navegador. Le indica a tus visitantes que tu sitio es seguro y confiable.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon"><i class="ti ti-rocket"></i></div>
+            <div>
+              <strong>Entrega en 5 a 7 días hábiles</strong>
+              <p>Una vez aprobado el diseño y recibido el material, tu web queda online en menos de una semana.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- MENSUAL -->
+      <div class="plan-card plan-card--monthly">
+        <div class="plan-header">
+          <div class="plan-badge plan-badge--monthly">Pago mensual</div>
+          <h3 class="plan-title">Mantenimiento y soporte continuo</h3>
+          <p class="plan-desc">Para que tu web siga online, segura y actualizada todos los meses.</p>
+        </div>
+        <ul class="plan-features">
+          <li>
+            <div class="plan-feature-icon plan-feature-icon--monthly"><i class="ti ti-server"></i></div>
+            <div>
+              <strong>Hosting incluido</strong>
+              <p>Tu web alojada en servidores rápidos y confiables. Sin esto, la página no existe en internet.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon plan-feature-icon--monthly"><i class="ti ti-edit"></i></div>
+            <div>
+              <strong>Cambios mínimos ilimitados</strong>
+              <p>Actualizar un texto, cambiar un número de teléfono, modificar un horario o reemplazar una foto. Sin límite de solicitudes.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon plan-feature-icon--monthly"><i class="ti ti-star"></i></div>
+            <div>
+              <strong>2 solicitudes de cambios complejos por mes</strong>
+              <p>Para modificaciones más grandes: agregar una nueva sección, cambiar el diseño de un bloque o integrar una nueva funcionalidad.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon plan-feature-icon--monthly"><i class="ti ti-shield-check"></i></div>
+            <div>
+              <strong>Seguridad y actualizaciones</strong>
+              <p>Me encargo de mantener todo actualizado para que tu web no tenga problemas de seguridad ni caídas.</p>
+            </div>
+          </li>
+          <li>
+            <div class="plan-feature-icon plan-feature-icon--monthly"><i class="ti ti-headset"></i></div>
+            <div>
+              <strong>Soporte por WhatsApp</strong>
+              <p>Cualquier consulta o problema, me escribís directo y te respondo a la brevedad.</p>
+            </div>
+          </li>
+        </ul>
+        <div class="plan-note">
+          <i class="ti ti-info-circle"></i>
+          Las solicitudes de cambios complejos no utilizadas <strong>no se acumulan</strong> al mes siguiente.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="section-full">
+    <div class="section-full-inner">
+      <div class="section-header left">
+        <div class="section-eyebrow">Trabajos realizados</div>
+        <h2 class="section-title">Ejemplos de lo que podés tener</h2>
+        <p class="section-subtitle">Cada web es única, diseñada según el rubro y la identidad de cada cliente.</p>
+      </div>
+
+      <div class="carousel-wrapper">
+        <button class="carousel-btn carousel-btn--prev" onclick="moveCarousel(-1)" aria-label="Anterior">
+          <i class="ti ti-chevron-left"></i>
+        </button>
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="carouselTrack">
+
+            <!-- PROYECTO 1: Estudio Contable -->
+            <div class="carousel-slide">
+              <div class="carousel-card">
+                <div class="carousel-imgs">
+                  <img src="demo_contable_1.png" alt="Estudio Contable - Hero" class="carousel-img carousel-img--active" />
+                  <img src="demo_contable_2.png" alt="Estudio Contable - Contacto" class="carousel-img" />
+                  <div class="carousel-img-nav">
+                    <span class="img-dot img-dot--active" onclick="switchImg(this, 0)"></span>
+                    <span class="img-dot" onclick="switchImg(this, 1)"></span>
+                  </div>
+                </div>
+                <div class="carousel-info">
+                  <div class="carousel-tag">Estudio Contable</div>
+                  <h3 class="carousel-title">Kaluza Contabilidad</h3>
+                  <p class="carousel-desc">Landing page profesional para un estudio contable con sección de servicios, datos de contacto, formulario y botón de WhatsApp.</p>
+                  <div class="carousel-features">
+                    <span><i class="ti ti-check"></i> Diseño minimalista</span>
+                    <span><i class="ti ti-check"></i> Formulario de contacto</span>
+                    <span><i class="ti ti-check"></i> WhatsApp flotante</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROYECTO 2: Estudio Jurídico -->
+            <div class="carousel-slide">
+              <div class="carousel-card">
+                <div class="carousel-imgs">
+                  <img src="demo_juridico_1.png" alt="Estudio Jurídico - Hero" class="carousel-img carousel-img--active" />
+                  <img src="demo_juridico_2.png" alt="Estudio Jurídico - Áreas" class="carousel-img" />
+                  <div class="carousel-img-nav">
+                    <span class="img-dot img-dot--active" onclick="switchImg(this, 0)"></span>
+                    <span class="img-dot" onclick="switchImg(this, 1)"></span>
+                  </div>
+                </div>
+                <div class="carousel-info">
+                  <div class="carousel-tag">Estudio Jurídico</div>
+                  <h3 class="carousel-title">Rodríguez & Asociados</h3>
+                  <p class="carousel-desc">Landing page elegante y oscura para un estudio jurídico con 6 áreas de práctica, estadísticas y formulario de consulta.</p>
+                  <div class="carousel-features">
+                    <span><i class="ti ti-check"></i> Estilo oscuro y formal</span>
+                    <span><i class="ti ti-check"></i> Áreas de práctica</span>
+                    <span><i class="ti ti-check"></i> Consulta gratuita</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROYECTO 3: Fotografía -->
+            <div class="carousel-slide">
+              <div class="carousel-card">
+                <div class="carousel-imgs">
+                  <img src="demo_foto_1.png" alt="Fotografía - Hero" class="carousel-img carousel-img--active" />
+                  <img src="demo_foto_2.png" alt="Fotografía - Sobre mí" class="carousel-img" />
+                  <div class="carousel-img-nav">
+                    <span class="img-dot img-dot--active" onclick="switchImg(this, 0)"></span>
+                    <span class="img-dot" onclick="switchImg(this, 1)"></span>
+                  </div>
+                </div>
+                <div class="carousel-info">
+                  <div class="carousel-tag">Emprendimiento</div>
+                  <h3 class="carousel-title">Lucía Pereyra Fotografía</h3>
+                  <p class="carousel-desc">Landing page cálida y creativa para fotógrafa profesional con galería de trabajos, servicios y sección de reserva de sesión.</p>
+                  <div class="carousel-features">
+                    <span><i class="ti ti-check"></i> Estilo cálido y creativo</span>
+                    <span><i class="ti ti-check"></i> Galería de trabajos</span>
+                    <span><i class="ti ti-check"></i> Reserva por WhatsApp</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <button class="carousel-btn carousel-btn--next" onclick="moveCarousel(1)" aria-label="Siguiente">
+          <i class="ti ti-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Indicadores -->
+      <div class="carousel-dots">
+        <button class="c-dot c-dot--active" onclick="goToSlide(0)"></button>
+        <button class="c-dot" onclick="goToSlide(1)"></button>
+        <button class="c-dot" onclick="goToSlide(2)"></button>
+      </div>
+
+    </div>
+  </section>
+
+    <!-- CTA FINAL -->
+  <section class="section" style="padding-top: 1rem;">
+    <div class="cta-final">
+      <h2>¿Listo para tener tu página web?</h2>
+      <p>Contame sobre tu negocio y te armo una propuesta sin compromiso.</p>
+      <a href="https://wa.me/5492994610602?text=Hola%20Ezequiel%2C%20quiero%20consultar%20sobre%20una%20p%C3%A1gina%20web" class="btn-white">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Escribir por WhatsApp
+      </a>
+      <p class="cta-note">Respuesta dentro del día · Sin compromiso</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        Ezequiel A.
+        <span>Desarrollo de Páginas Web · Neuquén</span>
+      </div>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-btn"><i class="ti ti-brand-instagram"></i></a>
+        <a href="https://wa.me/5492994610602" class="footer-social-btn"><i class="ti ti-brand-whatsapp"></i></a>
+      </div>
+      <div class="footer-copy">© 2026 · Todos los derechos reservados</div>
+    </div>
+  </footer>
+
+  <div class="whatsapp-float">
+    <a href="https://wa.me/5492994610602?text=Hola%20Ezequiel%2C%20quiero%20consultar%20sobre%20una%20p%C3%A1gina%20web" class="whatsapp-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span>Hablemos</span>
+    </a>
+  </div>
+
+
+  <script>
+    // Carousel logic
+    let currentSlide = 0;
+    const totalSlides = 3;
+
+    function moveCarousel(dir) {
+      currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      document.getElementById('carouselTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+      document.querySelectorAll('.c-dot').forEach((d, i) => {
+        d.classList.toggle('c-dot--active', i === currentSlide);
+      });
+    }
+
+    // Switch image within a slide
+    function switchImg(dotEl, imgIndex) {
+      const card = dotEl.closest('.carousel-card');
+      card.querySelectorAll('.carousel-img').forEach((img, i) => {
+        img.classList.toggle('carousel-img--active', i === imgIndex);
+      });
+      card.querySelectorAll('.img-dot').forEach((d, i) => {
+        d.classList.toggle('img-dot--active', i === imgIndex);
+      });
+    }
+
+    // Swipe support for mobile
+    let touchStartX = 0;
+    const viewport = document.querySelector('.carousel-viewport');
+    if (viewport) {
+      viewport.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+      viewport.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) moveCarousel(diff > 0 ? 1 : -1);
+      });
+    }
+  </script>
+
+</body>
+</html>
